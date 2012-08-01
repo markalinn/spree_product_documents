@@ -2,8 +2,9 @@ class Admin::DocsController < Admin::ResourceController
   before_filter :load_data
 	
   create.before :set_viewable
-  update.before :set_viewable
-  destroy.before :destroy_before
+  update.before :update_before
+  #This before action was prohibiting the doc from deleting
+  #destroy.before :destroy_before
 
   def update_positions
     params[:positions].each do |id, index|
@@ -46,5 +47,4 @@ class Admin::DocsController < Admin::ResourceController
   def destroy_before 
     @viewable = object.viewable
   end
-
 end
